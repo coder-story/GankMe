@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GankMe</string>
+    <string name="main_home">干货</string>
+    <string name="main_girls">阅读</string>
+    <string name="main_mine">我的</string>
+    <string name="bye_burger_bottom_behavior">dawn.com.gankme.app.behavior.ByeBurgerBottomBehavior</string>
+    <string name="image_transition">image_trans_name</string>
+    <string name="str_todo"> 1、元素共享 \n 2、收藏（数据库或收藏到有道云笔记） \n 3、夜间模式 \n 4、 接入 tinker
+    \n  5、代码规范(MVP) \n 6、搜索 </string>
+</resources>
