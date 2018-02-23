@@ -17,6 +17,7 @@ package dawn.com.gankme.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.v7.app.AppCompatDelegate;
 
 import com.jess.arms.base.delegate.AppLifecycles;
 import com.jess.arms.utils.ArmsUtils;
@@ -27,6 +28,10 @@ import butterknife.ButterKnife;
 import dawn.com.gankme.BuildConfig;
 import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
+import skin.support.SkinCompatManager;
+import skin.support.app.SkinCardViewInflater;
+import skin.support.constraint.app.SkinConstraintViewInflater;
+import skin.support.design.app.SkinMaterialViewInflater;
 import timber.log.Timber;
 
 /**
@@ -67,23 +72,22 @@ public class AppLifecyclesImpl implements AppLifecycles {
 //                    });
             ButterKnife.setDebug(true);
 
-
-            Fragmentation.builder()
-                    // 设置 栈视图 模式为 （默认）悬浮球模式   SHAKE: 摇一摇唤出  NONE：隐藏， 仅在Debug环境生效
-                    .stackViewMode(Fragmentation.BUBBLE)
-                    .debug(true) // 实际场景建议.debug(BuildConfig.DEBUG)
-                    /**
-                     * 可以获取到{@link me.yokeyword.fragmentation.exception.AfterSaveStateTransactionWarning}
-                     * 在遇到After onSaveInstanceState时，不会抛出异常，会回调到下面的ExceptionHandler
-                     */
-                    .handleException(new ExceptionHandler() {
-                        @Override
-                        public void onException(Exception e) {
-                            // 以Bugtags为例子: 把捕获到的 Exception 传到 Bugtags 后台。
-                            // Bugtags.sendException(e);
-                        }
-                    })
-                    .install();
+//            Fragmentation.builder()
+//                    // 设置 栈视图 模式为 （默认）悬浮球模式   SHAKE: 摇一摇唤出  NONE：隐藏， 仅在Debug环境生效
+//                    .stackViewMode(Fragmentation.BUBBLE)
+//                    .debug(true) // 实际场景建议.debug(BuildConfig.DEBUG)
+//                    /**
+//                     * 可以获取到{@link me.yokeyword.fragmentation.exception.AfterSaveStateTransactionWarning}
+//                     * 在遇到After onSaveInstanceState时，不会抛出异常，会回调到下面的ExceptionHandler
+//                     */
+//                    .handleException(new ExceptionHandler() {
+//                        @Override
+//                        public void onException(Exception e) {
+//                            // 以Bugtags为例子: 把捕获到的 Exception 传到 Bugtags 后台。
+//                            // Bugtags.sendException(e);
+//                        }
+//                    })
+//                    .install();
         }
         //leakCanary内存泄露检查
         ArmsUtils.obtainAppComponentFromContext(application).extras().put(RefWatcher.class.getName(), BuildConfig.USE_CANARY ? LeakCanary.install(application) : RefWatcher.DISABLED);
@@ -99,6 +103,18 @@ public class AppLifecyclesImpl implements AppLifecycles {
         //Message msg = new Message();
         //msg.what = 0;
         //AppManager.post(msg); like EventBus
+        initSkin(application);
+    }
+
+    private void initSkin(Application application) {
+        SkinCompatManager.withoutActivity(application)                         // Basic Widget support
+                .addInflater(new SkinMaterialViewInflater())            // material design support           [selectable]
+                .addInflater(new SkinConstraintViewInflater())          // ConstraintLayout support          [selectable]
+                .addInflater(new SkinCardViewInflater())                // CardView v7 support               [selectable]
+                .setSkinStatusBarColorEnable(false)                     // Disable statusBarColor skin support，default true   [selectable]
+                .setSkinWindowBackgroundEnable(false)                   // Disable windowBackground skin support，default true [selectable]
+                .loadSkin();
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
     @Override

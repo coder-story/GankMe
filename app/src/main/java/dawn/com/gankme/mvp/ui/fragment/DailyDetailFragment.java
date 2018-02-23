@@ -3,11 +3,11 @@ package dawn.com.gankme.mvp.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.support.v7.widget.Toolbar;
 import android.widget.ProgressBar;
 
 import com.github.ybq.android.spinkit.SpinKitView;
@@ -21,8 +21,6 @@ import com.jess.arms.utils.ArmsUtils;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import dawn.com.gankme.R;
 import dawn.com.gankme.di.component.DaggerDailyDetailComponent;
 import dawn.com.gankme.di.module.DailyDetailModule;
@@ -32,7 +30,6 @@ import dawn.com.gankme.mvp.presenter.DailyDetailPresenter;
 import dawn.com.gankme.mvp.ui.BaseSupportFragment;
 import dawn.com.gankme.mvp.ui.activity.ShowPictureActivity;
 import dawn.com.gankme.mvp.ui.adapter.DailyDetailAdapter;
-import dawn.com.gankme.mvp.ui.adapter.HomeAdapter;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 
 /**

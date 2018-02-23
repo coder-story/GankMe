@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     android:layout_height="match_parent">
 
     <TextView
@@ -9,8 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="我的收藏"
-        android:textSize="22sp"
+        android:textSize="18sp"
+        android:background="#226699"
         android:gravity="center"
+        android:textStyle="bold"
+        />
 
+    <TextView
+        android:id="@+id/tv_change_skin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="夜间模式"
+        android:textSize="18sp"
+        android:layout_marginTop="5dp"
+        android:background="#118899"
+        android:gravity="center"
+        android:textStyle="bold"
         />
 </LinearLayout>

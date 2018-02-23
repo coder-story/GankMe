@@ -1,11 +1,14 @@
 package dawn.com.gankme.mvp.ui.fragment;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,32 +20,44 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextSwitcher;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.github.ybq.android.spinkit.style.Wave;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import butterknife.BindView;
 import dawn.com.gankme.R;
 import dawn.com.gankme.mvp.ui.BaseSupportFragment;
+import dawn.com.gankme.mvp.ui.activity.MainActivity;
 
 /**
  * Created by Administrator on 2018/2/7.
  */
 
-public class WebFragment extends BaseSupportFragment  {
+public class WebFragment extends BaseSupportFragment {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.fl_root_web)
     FrameLayout root_web;
+    @BindView(R.id.textSwitcher)
+    TextSwitcher mTextSwitcher;
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
     @BindView(R.id.spin_kit)
     SpinKitView spinKitView;
     @BindView(R.id.fab)
-    FloatingActionButton  floatingActionButton;
+    FloatingActionButton floatingActionButton;
 
     private String url;
     private String title;
@@ -65,7 +80,7 @@ public class WebFragment extends BaseSupportFragment  {
 
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-         return inflater.inflate(R.layout.frg_webview, container, false);
+        return inflater.inflate(R.layout.frg_webview, container, false);
     }
 
     @Override
@@ -74,7 +89,7 @@ public class WebFragment extends BaseSupportFragment  {
         title = getArguments().getString("title");
         setNavigationOnClickListener(toolbar);
         initWebView();
-
+        initTextSwitch();
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,12 +98,39 @@ public class WebFragment extends BaseSupportFragment  {
         });
     }
 
+    private void initTextSwitch() {
+
+        mTextSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
+            @SuppressWarnings("deprecation")
+            @Override
+            public View makeView() {
+                Context context = getActivity();
+                TextView textView = new TextView(context);
+                textView.setTextAppearance(context, R.style.WebTitle);
+                textView.setSingleLine(true);
+                textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View v) {
+                        v.setSelected(!v.isSelected());
+                    }
+                });
+                return textView;
+            }
+        });
+        mTextSwitcher.setInAnimation(getActivity(), android.R.anim.fade_in);
+        mTextSwitcher.setOutAnimation(getActivity(), android.R.anim.fade_out);
+        mTextSwitcher.setText(title);
+        mTextSwitcher.setSelected(true);
+       Toolbar.LayoutParams  layoutParams=(Toolbar.LayoutParams) mTextSwitcher.getLayoutParams();
+        layoutParams.gravity= Gravity.CENTER_VERTICAL;
+    }
 
 
     private void initWebView() {
-        toolbar.setTitle(title);
+        //toolbar.setTitle(title);
 
-        Wave wave=new Wave();
+        Wave wave = new Wave();
         progressBar.setIndeterminateDrawable(wave);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -133,6 +175,9 @@ public class WebFragment extends BaseSupportFragment  {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 //设定加载开始的操作
                 progressBar.setVisibility(View.VISIBLE);
+
+
+
             }
 
             @Override
@@ -162,7 +207,6 @@ public class WebFragment extends BaseSupportFragment  {
                 } else {
                     progressBar.setVisibility(View.GONE);
                     spinKitView.setVisibility(View.GONE);
-                    toolbar.setVisibility(View.VISIBLE);
                     floatingActionButton.setVisibility(View.VISIBLE);
                 }
 
@@ -204,9 +248,8 @@ public class WebFragment extends BaseSupportFragment  {
 
     @Override
     protected boolean isSwipeBack() {
-        return   true;
+        return true;
     }
-
 
 
 }

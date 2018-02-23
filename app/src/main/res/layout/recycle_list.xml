@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<dawn.com.gankme.mvp.ui.widget.AutoCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="650px"
+    android:layout_height="250dp"
     android:layout_margin="15px">
 
     <ImageView
@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
+        android:transitionName="@string/image_transition"
         tools:src="#000000" />
 
 
@@ -17,12 +18,13 @@
         android:id="@+id/tv_name"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+      android:layout_gravity="center"
         android:ellipsize="end"
         android:maxLines="2"
+        tools:text="1122"
         android:textColor="#d5ffffff"
         android:textSize="20sp"
-        android:textStyle="bold"
-      />
+        android:textStyle="bold" />
 
-</dawn.com.gankme.mvp.ui.widget.AutoCardView>
+
+</FrameLayout>

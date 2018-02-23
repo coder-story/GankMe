@@ -55,7 +55,6 @@ public class MainActivity extends BaseSupportActivity {
     private long lastBackKeyDownTick = 0;
     private static final long MAX_DOUBLE_BACK_DURATION = 1500;
 
-
     private SupportFragment[] mFragments = new SupportFragment[3];
 
 
@@ -77,11 +76,11 @@ public class MainActivity extends BaseSupportActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         //ArmsUtils.statuInScreen(this);//开启沉浸式
+
         switchFragment(0);
         setupView();
 
     }
-
 
     private void setupView() {
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -126,7 +125,6 @@ public class MainActivity extends BaseSupportActivity {
 
 
     }
-
 
 
     @Override

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
+    android:background="@color/colorPrimary"
     >
 
 
@@ -48,6 +48,6 @@
             android:drawablePadding="5dp"
             android:gravity="left"
             android:text="搜索"
-            android:textColor="#8A8A8A" />
+            android:textColor="@color/search_color" />
     </LinearLayout>
 </FrameLayout>
