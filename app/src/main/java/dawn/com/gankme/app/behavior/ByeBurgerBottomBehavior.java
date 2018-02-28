@@ -38,6 +38,7 @@ public class ByeBurgerBottomBehavior extends ByeBurgerBehavior {
         if (mAnimateHelper.getState() == TranslateAnimateHelper.STATE_HIDE) {
           mAnimateHelper.show();
         }
+
       } else if (dy > 0) {
         if (mAnimateHelper.getState() == TranslateAnimateHelper.STATE_SHOW) {
           mAnimateHelper.hide();

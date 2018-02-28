@@ -39,7 +39,6 @@ import dawn.com.gankme.mvp.model.api.Api;
 import dawn.com.gankme.mvp.model.api.service.GankService;
 import me.jessyan.progressmanager.ProgressManager;
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
-import retrofit2.converter.fastjson.FastJsonConverterFactory;
 
 /**
  * ================================================
@@ -106,7 +105,7 @@ public final class GlobalConfiguration implements ConfigModule {
                             .enableComplexMapKeySerialization();//支持将序列化key为object的map,默认只能序列化key为string的map
                 })
                 .retrofitConfiguration((context1, retrofitBuilder) -> {//这里可以自己自定义配置Retrofit的参数,甚至你可以替换系统配置好的okhttp对象
-                    retrofitBuilder.addConverterFactory(FastJsonConverterFactory.create());//比如使用fastjson替代gson
+                 //   retrofitBuilder.addConverterFactory(FastJsonConverterFactory.create());//比如使用fastjson替代gson
                 })
                 .okhttpConfiguration((context1, okhttpBuilder) -> {//这里可以自己自定义配置Okhttp的参数
 //                    okhttpBuilder.sslSocketFactory(); //支持 Https,详情请百度

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
@@ -57,6 +58,8 @@ dependencies {
     implementation(rootProject.ext.dependencies["cardview-v7"]) {
         exclude module: 'support-annotations'
     }
+    compile 'me.jessyan:arms:2.3.5'
+
     //tools
     annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
     implementation rootProject.ext.dependencies["progressmanager"]
@@ -67,13 +70,12 @@ dependencies {
         exclude module: 'support-annotations'
     }
     implementation rootProject.ext.dependencies["paginate"]
-    //arms
-    implementation project(':arms')
+
     testImplementation rootProject.ext.dependencies["junit"]
     debugImplementation rootProject.ext.dependencies["canary-debug"]
     releaseImplementation rootProject.ext.dependencies["canary-release"]
     testImplementation rootProject.ext.dependencies["canary-release"]
-    compile 'br.com.mauker.materialsearchview:materialsearchview:1.2.2'
+
     compile 'me.yokeyword:fragmentation:1.2.6'
     // swipeback基于fragmentation, 如果是自定制SupportActivity/Fragment，则参照SwipeBackActivity/Fragment实现即可
     implementation project(':fragmentation_swipeback')
@@ -82,4 +84,7 @@ dependencies {
     compile 'skin.support:skin-support-design:2.2.3'            // skin-support-design material design support [selectable]
     compile 'skin.support:skin-support-cardview:2.2.3'          // skin-support-cardview CardView support [selectable]
     compile 'skin.support:skin-support-constraint-layout:2.2.3' // skin-sup
+    compile 'com.github.ybq:Android-SpinKit:1.1.0'
 }
+
+

@@ -16,16 +16,19 @@ import android.widget.TextView;
 import com.jess.arms.base.DefaultAdapter;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.Preconditions;
 import com.paginate.Paginate;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import org.simple.eventbus.EventBus;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import dawn.com.gankme.R;
+import dawn.com.gankme.app.constants.TagConstant;
 import dawn.com.gankme.di.component.DaggerGankListComponent;
 import dawn.com.gankme.di.module.GankListModule;
 import dawn.com.gankme.mvp.contract.GankListContract;
@@ -34,7 +37,6 @@ import dawn.com.gankme.mvp.presenter.GankListPresenter;
 import dawn.com.gankme.mvp.ui.BaseSupportFragment;
 import dawn.com.gankme.mvp.ui.adapter.HomeAdapter;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
-import timber.log.Timber;
 
 /**
  * Created by Administrator on 2018/1/29.
@@ -109,7 +111,7 @@ public class GankListFragment extends BaseSupportFragment<GankListPresenter> imp
 
     private void expand() {
         //设置伸展状态时的布局
-        tvSearch.setText("搜索真的好了！不骗你！");
+        tvSearch.setText(R.string.search_expand);
         FrameLayout.LayoutParams LayoutParams = (FrameLayout.LayoutParams) mSearchLayout.getLayoutParams();
         LayoutParams.width = LayoutParams.MATCH_PARENT;
         LayoutParams.setMargins(ArmsUtils.dip2px(getContext(), 10), ArmsUtils.dip2px(getContext(), 10),
@@ -121,7 +123,7 @@ public class GankListFragment extends BaseSupportFragment<GankListPresenter> imp
 
     private void reduce() {
         //设置收缩状态时的布局
-        tvSearch.setText("搜索");
+        tvSearch.setText(R.string.search);
         FrameLayout.LayoutParams LayoutParams = (FrameLayout.LayoutParams) mSearchLayout.getLayoutParams();
         LayoutParams.width = ArmsUtils.dip2px(getContext(), 80);
         LayoutParams.setMargins(ArmsUtils.dip2px(getContext(), 10), ArmsUtils.dip2px(getContext(), 10),
@@ -259,6 +261,7 @@ public class GankListFragment extends BaseSupportFragment<GankListPresenter> imp
 
     @Override
     public void onItemClick(View view, int viewType, Object data, int position) {
+        Preconditions.checkNotNull(data,"data cannot be null");
         String date = ((Daily) data).getDate();
         String imgUrl = ((Daily) data).getImgUrl();
         String[] dates = null;
@@ -267,7 +270,7 @@ public class GankListFragment extends BaseSupportFragment<GankListPresenter> imp
         } else if (date.contains("/")) {
             dates = date.split("/");
         }
-
+        EventBus.getDefault().post(true, TagConstant.HIDE_BOTTOM_TAG);
         start(DailyDetailFragment.newInstance(imgUrl, dates[0], dates[1], dates[2]));
     }
 

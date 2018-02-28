@@ -19,17 +19,20 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import org.simple.eventbus.Subscriber;
+
 import butterknife.BindView;
 import dawn.com.gankme.R;
+import dawn.com.gankme.app.constants.TagConstant;
 import dawn.com.gankme.mvp.ui.BaseSupportActivity;
-import dawn.com.gankme.mvp.ui.fragment.GankListFragment;
 import dawn.com.gankme.mvp.ui.fragment.GirlsFragment;
 import dawn.com.gankme.mvp.ui.fragment.HomeFragment;
 import dawn.com.gankme.mvp.ui.fragment.MineFragment;
@@ -45,6 +48,8 @@ public class MainActivity extends BaseSupportActivity {
 
     @BindView(R.id.frame_content)
     FrameLayout frameContent;
+    @BindView(R.id.ll_bottom)
+    LinearLayout ll_bottom;
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigation;
 
@@ -133,13 +138,21 @@ public class MainActivity extends BaseSupportActivity {
 
         long currentTick = System.currentTimeMillis();
         if (currentTick - lastBackKeyDownTick > MAX_DOUBLE_BACK_DURATION) {
-            ArmsUtils.snackbarText("再按一次退出");
+            ArmsUtils.snackbarText(getString(R.string.double_click_exit));
             lastBackKeyDownTick = currentTick;
         } else {
             finish();
         }
 
+    }
 
+    @Subscriber(tag = TagConstant.HIDE_BOTTOM_TAG)
+    private void updateUserWithTag(boolean isHide) {
+        if (isHide) {
+            ll_bottom.setVisibility(View.GONE);
+        } else {
+            ll_bottom.setVisibility(View.VISIBLE);
+        }
     }
 
 

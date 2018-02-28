@@ -84,7 +84,6 @@ public abstract class BaseSupportFragment<P extends IPresenter> extends SwipeBac
         return true;
     }
 
-    @Override
     public void setNavigationOnClickListener(Toolbar toolbar) {
         if (toolbar != null) {
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {

@@ -1,1 +1,1 @@
-include ':app', ':arms', ':fragmentation_swipeback', ':fragmentation', ':fragmentation_core'
+include ':app',  ':fragmentation_swipeback', ':fragmentation', ':fragmentation_core'

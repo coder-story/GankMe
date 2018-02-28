@@ -18,10 +18,14 @@ import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
 import com.jess.arms.utils.ArmsUtils;
 
+import org.simple.eventbus.EventBus;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import dawn.com.gankme.R;
+import dawn.com.gankme.app.constants.KeyConstant;
+import dawn.com.gankme.app.constants.TagConstant;
 import dawn.com.gankme.di.component.DaggerDailyDetailComponent;
 import dawn.com.gankme.di.module.DailyDetailModule;
 import dawn.com.gankme.mvp.contract.DailyContract;
@@ -90,10 +94,10 @@ public class DailyDetailFragment extends BaseSupportFragment<DailyDetailPresente
     @Override
     public void initData(Bundle savedInstanceState) {
 
-        date = getArguments().getString("year") + "/"
-                + getArguments().getString("month") + "/"
-                + getArguments().getString("day");
-        imgUrl = getArguments().getString("url");
+        date = getArguments().getString(KeyConstant.YEAR) + "/"
+                + getArguments().getString(KeyConstant.MONTH) + "/"
+                + getArguments().getString(KeyConstant.DAY);
+        imgUrl = getArguments().getString(KeyConstant.URL);
 
         setNavigationOnClickListener(toolbar);
         initRecyclerView();
@@ -111,17 +115,10 @@ public class DailyDetailFragment extends BaseSupportFragment<DailyDetailPresente
                         .url(imgUrl)
                         .imageView(ivImage)
                         .build());
-        ivImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent  intent  =new Intent(getActivity(), ShowPictureActivity.class);
-                intent.putExtra("imgUrl",imgUrl);
-                ArmsUtils.startActivity(getActivity(),intent);
-//                if (mPresenter != null && imgUrl != null) {
-//                    mPresenter.downLoadImg(imgUrl);
-//
-//                }
-            }
+        ivImage.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ShowPictureActivity.class);
+            intent.putExtra(KeyConstant.IMG_URL, imgUrl);
+            ArmsUtils.startActivity(getActivity(), intent);
         });
 
 
@@ -168,21 +165,24 @@ public class DailyDetailFragment extends BaseSupportFragment<DailyDetailPresente
 
     @Override
     public void onDestroy() {
+        EventBus.getDefault().post(false, TagConstant.HIDE_BOTTOM_TAG);
         DefaultAdapter.releaseAllHolder(mRecyclerView);//super.onDestroy()之后会unbind,所有view被置为null,所以必须在之前调用
         progressBar = null;
         spinKitView = null;
         super.onDestroy();
 
     }
+
     @Override
     public boolean onBackPressedSupport() {
+
         pop();
         return true;
     }
 
     @Override
     protected boolean isSwipeBack() {
-        return   true;
+        return true;
     }
 
     @Override

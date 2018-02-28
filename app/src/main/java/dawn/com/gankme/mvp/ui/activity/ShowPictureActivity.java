@@ -18,6 +18,7 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.OnClick;
 import dawn.com.gankme.R;
+import dawn.com.gankme.app.constants.KeyConstant;
 import dawn.com.gankme.app.utils.FileUtils;
 import dawn.com.gankme.mvp.model.api.service.CommonService;
 import dawn.com.gankme.mvp.model.subscriber.DownLoadSubscribe;
@@ -55,7 +56,7 @@ public class ShowPictureActivity extends BaseActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
 
-        imgUrl = getIntent().getStringExtra("imgUrl");
+        imgUrl = getIntent().getStringExtra(KeyConstant.IMG_URL);
 
         imageLoader.loadImage(appComponent.application(), ImageConfigImpl
                 .builder()
@@ -83,7 +84,7 @@ public class ShowPictureActivity extends BaseActivity {
                             @Override
                             public void onCompleted(File file) {
                                 if (file != null) {
-                                    ArmsUtils.snackbarText("图片保存成功：" + file.getAbsolutePath());
+                                    ArmsUtils.snackbarText(getString(R.string.save_picture_success) + file.getAbsolutePath());
                                     MediaScannerConnection.scanFile(getApplicationContext(), new String[]{
                                                     file.getAbsolutePath()},
                                             null, null);

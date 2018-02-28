@@ -14,17 +14,23 @@
         tools:src="#000000" />
 
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"
+        />
     <TextView
         android:id="@+id/tv_name"
-        android:layout_width="240dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-      android:layout_gravity="center"
         android:ellipsize="end"
         android:maxLines="2"
         tools:text="1122"
-        android:textColor="#d5ffffff"
-        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="bottom"
+        android:textColor="#ffffff"
+        android:textSize="17sp"
         android:textStyle="bold" />
-
 
 </FrameLayout>
