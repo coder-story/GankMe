@@ -10,4 +10,6 @@ public class KeyConstant {
     public static final String MONTH = "month";
     public static final String DAY = "day";
     public static final String URL = "url";
+    public static final String CATEGORY = "category";
+
 }

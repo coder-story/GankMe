@@ -27,6 +27,7 @@ import com.jess.arms.base.delegate.IFragment;
 import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
+import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.PermissionUtil;
 import com.jess.arms.utils.RxLifecycleUtils;
 
@@ -112,7 +113,6 @@ public class GankListPresenter extends BasePresenter<GankListContract.Model, Gan
         //关于RxCache缓存库的使用请参考 http://www.jianshu.com/p/b58ef6b0624b
 
         boolean isEvictCache = pullToRefresh;//是否驱逐缓存,为ture即不使用缓存,每次下拉刷新即需要最新数据,则不使用缓存
-
         if (pullToRefresh && isFirst) {//默认在第一次下拉刷新时使用缓存
             isFirst = false;
             isEvictCache = false;

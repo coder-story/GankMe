@@ -61,7 +61,6 @@ public class GankListFragment extends BaseSupportFragment<GankListPresenter> imp
     RecyclerView.LayoutManager mLayoutManager;
     @Inject
     RecyclerView.Adapter mAdapter;
-    Unbinder unbinder;
 
     private Paginate mPaginate;
     private boolean isLoadingMore;

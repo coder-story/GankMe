@@ -19,15 +19,12 @@ import android.view.View;
 
 import com.jess.arms.base.BaseHolder;
 import com.jess.arms.base.DefaultAdapter;
-import com.jess.arms.utils.ArmsUtils;
 
 import java.util.List;
 
 import dawn.com.gankme.R;
 import dawn.com.gankme.mvp.model.entity.Daily;
-import dawn.com.gankme.mvp.model.entity.User;
 import dawn.com.gankme.mvp.ui.holder.DailyItemHolder;
-import dawn.com.gankme.mvp.ui.holder.UserItemHolder;
 
 /**
  * ================================================
@@ -54,6 +51,6 @@ public class HomeAdapter extends DefaultAdapter<Daily> {
 
     @Override
     public int getLayoutId(int viewType) {
-        return R.layout.recycle_list;
+        return R.layout.gank_list_item;
     }
 }

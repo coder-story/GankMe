@@ -47,6 +47,6 @@ public class UserAdapter extends DefaultAdapter<User> {
 
     @Override
     public int getLayoutId(int viewType) {
-        return R.layout.recycle_list;
+        return R.layout.gank_list_item;
     }
 }

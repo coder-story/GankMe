@@ -33,7 +33,7 @@ import butterknife.BindView;
 import dawn.com.gankme.R;
 import dawn.com.gankme.app.constants.TagConstant;
 import dawn.com.gankme.mvp.ui.BaseSupportActivity;
-import dawn.com.gankme.mvp.ui.fragment.GirlsFragment;
+import dawn.com.gankme.mvp.ui.fragment.AllCategoryFragment;
 import dawn.com.gankme.mvp.ui.fragment.HomeFragment;
 import dawn.com.gankme.mvp.ui.fragment.MineFragment;
 import me.yokeyword.fragmentation.SupportFragment;
@@ -114,7 +114,7 @@ public class MainActivity extends BaseSupportActivity {
         SupportFragment firstFrg = findFragment(HomeFragment.class);
         if (firstFrg == null) {
             mFragments[FIRST] = HomeFragment.newInstance();
-            mFragments[SECOND] = GirlsFragment.newInstance();
+            mFragments[SECOND] = AllCategoryFragment.newInstance();
             mFragments[THIRD] = MineFragment.newInstance();
             loadMultipleRootFragment(R.id.frame_content, FIRST,
                     mFragments[FIRST],
@@ -123,7 +123,7 @@ public class MainActivity extends BaseSupportActivity {
 
         } else {
             mFragments[FIRST] = firstFrg;
-            mFragments[SECOND] = findFragment(GirlsFragment.class);
+            mFragments[SECOND] = findFragment(AllCategoryFragment.class);
             mFragments[THIRD] = findFragment(MineFragment.class);
         }
         showHideFragment(mFragments[index]);

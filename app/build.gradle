@@ -70,7 +70,7 @@ dependencies {
         exclude module: 'support-annotations'
     }
     implementation rootProject.ext.dependencies["paginate"]
-
+    implementation rootProject.ext.dependencies["percent"]
     testImplementation rootProject.ext.dependencies["junit"]
     debugImplementation rootProject.ext.dependencies["canary-debug"]
     releaseImplementation rootProject.ext.dependencies["canary-release"]

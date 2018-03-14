@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_colletation"
+        android:icon="@drawable/ic_arrow_back_24dp"
+        android:title="收藏" />
+    <item
+        android:id="@+id/nav_night_model"
+        android:icon="@drawable/ic_arrow_back_24dp"
+        android:title="夜间模式" />
+
+
+</menu>
+
+
