@@ -18,11 +18,12 @@ import dawn.com.gankme.mvp.contract.CategoryContract;
 import dawn.com.gankme.mvp.presenter.CategoryPresenter;
 
 import dawn.com.gankme.R;
+import dawn.com.gankme.mvp.ui.BaseSupportFragment;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 
-public class CategoryFragment extends BaseFragment<CategoryPresenter> implements CategoryContract.View {
+public class CategoryFragment extends BaseSupportFragment<CategoryPresenter> implements CategoryContract.View {
 
 
     public static CategoryFragment newInstance(String category) {
