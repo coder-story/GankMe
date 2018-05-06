@@ -1,23 +1,26 @@
 package dawn.com.gankme.mvp.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jess.arms.di.component.AppComponent;
-import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.http.imageloader.ImageConfig;
+import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
+import com.jess.arms.utils.DataHelper;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import dawn.com.gankme.R;
+import dawn.com.gankme.app.constants.KeyConstant;
 import dawn.com.gankme.app.utils.SPUtils;
 import dawn.com.gankme.mvp.ui.BaseSupportFragment;
-import skin.support.SkinCompatManager;
-import timber.log.Timber;
+import dawn.com.gankme.mvp.ui.activity.LoginActivity;
 
 /**
  * Created by Administrator on 2018/1/29.
@@ -27,8 +30,10 @@ public class MineFragment extends BaseSupportFragment {
 
     @BindView(R.id.tv_collect)
     TextView tvCollect;
-    @BindView(R.id.tv_change_skin)
-    TextView tvChangeSkin;
+    @BindView(R.id.tv_login)
+    TextView tvLogin;
+    @BindView(R.id.img_avatar)
+    ImageView  img_avatar;
     private int night_mode;
     private AppComponent component;
 
@@ -51,12 +56,27 @@ public class MineFragment extends BaseSupportFragment {
     public void initData(Bundle savedInstanceState) {
 
 
-        if (night_mode == -1) {
-            tvChangeSkin.setText("夜间模式");//当前是日间模式，点击切换到夜间模式
-        } else {
-            tvChangeSkin.setText("日间模式");
-        }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String  username= DataHelper.getStringSF(component.application(), KeyConstant.USERNAME);
+        if(!TextUtils.isEmpty(username)){
+            tvLogin.setText(username);
+            component.imageLoader().loadImage(getActivity(),
+                    ImageConfigImpl
+                            .builder()
+                            .isCircle(true)
+                            .url("http://ww1.sinaimg.cn/large/610dc034ly1fhyeyv5qwkj20u00u0q56.jpg")
+                            .imageView(img_avatar)
+                            .build());
+
+        }else{
+            tvLogin.setText("登陆");
+            img_avatar.setImageResource(R.mipmap.ic_launcher);
+        }
     }
 
     @Override
@@ -65,51 +85,16 @@ public class MineFragment extends BaseSupportFragment {
     }
 
 
-    @OnClick({R.id.tv_collect, R.id.tv_change_skin})
+    @OnClick({R.id.tv_collect, R.id.tv_login})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_collect:
                 break;
-            case R.id.tv_change_skin:
-
-                if (night_mode == -1) {
-                    //切换到夜间模式
-                    change2Night();
-                } else {
-                    change2Day();
-                }
-
+            case R.id.tv_login:
+                startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
         }
     }
 
-    private void change2Day() {
-        SkinCompatManager.getInstance().restoreDefaultTheme();
-        night_mode = -1;
-        tvChangeSkin.setText("夜间模式");
-        SPUtils.put(component.application(), "night_node", night_mode);
 
-    }
-
-    private void change2Night() {
-        SkinCompatManager.getInstance().loadSkin("night.skin", new SkinCompatManager.SkinLoaderListener() {
-
-            @Override
-            public void onStart() {
-
-            }
-
-            @Override
-            public void onSuccess() {
-                tvChangeSkin.setText("日间模式");
-                night_mode = 1;
-                SPUtils.put(component.application(), "night_node", night_mode);
-            }
-
-            @Override
-            public void onFailed(String errMsg) {
-
-            }
-        }, SkinCompatManager.SKIN_LOADER_STRATEGY_ASSETS);
-    }
 }

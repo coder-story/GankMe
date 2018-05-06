@@ -30,6 +30,8 @@ import com.github.ybq.android.spinkit.style.Wave;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
+import org.simple.eventbus.EventBus;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,8 +39,16 @@ import java.io.InputStream;
 
 import butterknife.BindView;
 import dawn.com.gankme.R;
+import dawn.com.gankme.app.constants.KeyConstant;
+import dawn.com.gankme.app.constants.TagConstant;
+import dawn.com.gankme.app.utils.RxUtils;
+import dawn.com.gankme.mvp.model.api.service.WanAndroidService;
+import dawn.com.gankme.mvp.model.entity.BaseJson;
 import dawn.com.gankme.mvp.ui.BaseSupportFragment;
 import dawn.com.gankme.mvp.ui.activity.MainActivity;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2018/2/7.
@@ -62,6 +72,18 @@ public class WebFragment extends BaseSupportFragment {
     private String url;
     private String title;
     private WebView mWebView;
+    private int articleId;
+
+    public static WebFragment newInstance(String url, String title,int articleId) {
+
+        Bundle args = new Bundle();
+        args.putString("url", url);
+        args.putString("title", title);
+        args.putInt(KeyConstant.ARTICLE_ID,articleId);
+        WebFragment fragment = new WebFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     public static WebFragment newInstance(String url, String title) {
 
@@ -87,13 +109,29 @@ public class WebFragment extends BaseSupportFragment {
     public void initData(Bundle savedInstanceState) {
         url = getArguments().getString("url");
         title = getArguments().getString("title");
+        articleId = getArguments().getInt(KeyConstant.ARTICLE_ID,0);
         setNavigationOnClickListener(toolbar);
         initWebView();
         initTextSwitch();
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArmsUtils.snackbarText("TODO: collect");
+                ArmsUtils.obtainAppComponentFromContext(getActivity())
+                        .repositoryManager()
+                        .obtainRetrofitService(WanAndroidService.class)
+                        .collect(articleId)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<BaseJson>() {
+                            @Override
+                            public void accept(BaseJson baseJson) throws Exception {
+                                if(baseJson.isSuccess()){
+                                    ArmsUtils.snackbarText("收藏成功。");
+                                }else {
+                                    ArmsUtils.snackbarText(baseJson.getErrorMsg());
+                                }
+                            }
+                        });
             }
         });
     }
@@ -122,8 +160,8 @@ public class WebFragment extends BaseSupportFragment {
         mTextSwitcher.setOutAnimation(getActivity(), android.R.anim.fade_out);
         mTextSwitcher.setText(title);
         mTextSwitcher.setSelected(true);
-       Toolbar.LayoutParams  layoutParams=(Toolbar.LayoutParams) mTextSwitcher.getLayoutParams();
-        layoutParams.gravity= Gravity.CENTER_VERTICAL;
+        Toolbar.LayoutParams layoutParams = (Toolbar.LayoutParams) mTextSwitcher.getLayoutParams();
+        layoutParams.gravity = Gravity.CENTER_VERTICAL;
     }
 
 
@@ -174,8 +212,8 @@ public class WebFragment extends BaseSupportFragment {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 //设定加载开始的操作
+                if(progressBar!=null)
                 progressBar.setVisibility(View.VISIBLE);
-
 
 
             }
@@ -183,7 +221,9 @@ public class WebFragment extends BaseSupportFragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 //设定加载结束的操作
+                if(progressBar!=null)
                 progressBar.setVisibility(View.GONE);
+                if(spinKitView!=null)
                 spinKitView.setVisibility(View.GONE);
             }
 
@@ -201,13 +241,14 @@ public class WebFragment extends BaseSupportFragment {
 
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-
-                if (newProgress < 75) {
-                    progressBar.setProgress(newProgress);
-                } else {
-                    progressBar.setVisibility(View.GONE);
-                    spinKitView.setVisibility(View.GONE);
-                    floatingActionButton.setVisibility(View.VISIBLE);
+                if (progressBar != null) {
+                    if (newProgress < 75) {
+                        progressBar.setProgress(newProgress);
+                    } else {
+                        progressBar.setVisibility(View.GONE);
+                        spinKitView.setVisibility(View.GONE);
+                        //floatingActionButton.setVisibility(View.VISIBLE);
+                    }
                 }
 
             }
@@ -251,5 +292,10 @@ public class WebFragment extends BaseSupportFragment {
         return true;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().post(false, TagConstant.HIDE_BOTTOM_TAG);
 
+    }
 }

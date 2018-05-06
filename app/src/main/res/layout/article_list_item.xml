@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dawn.com.gankme.mvp.ui.widget.AutoCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="180px"
+    android:layout_margin="15px">
+
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginTop="20px"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:maxEms="15"
+        android:textColor="#000"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        tools:text="1122" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_attachment_black_24dp"
+        android:layout_gravity="center_vertical|right"
+        android:layout_marginRight="-5dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|bottom"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/pink200"
+        android:textSize="15dp"
+        android:visibility="visible"
+        android:layout_marginBottom="20px"
+        tools:text="1呃呃呃2" />
+
+</dawn.com.gankme.mvp.ui.widget.AutoCardView>

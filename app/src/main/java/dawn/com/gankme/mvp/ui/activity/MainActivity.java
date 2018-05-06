@@ -114,7 +114,7 @@ public class MainActivity extends BaseSupportActivity {
         SupportFragment firstFrg = findFragment(HomeFragment.class);
         if (firstFrg == null) {
             mFragments[FIRST] = HomeFragment.newInstance();
-            mFragments[SECOND] = AllCategoryFragment.newInstance();
+            mFragments[SECOND] = MineFragment.newInstance();
             mFragments[THIRD] = MineFragment.newInstance();
             loadMultipleRootFragment(R.id.frame_content, FIRST,
                     mFragments[FIRST],
@@ -123,7 +123,7 @@ public class MainActivity extends BaseSupportActivity {
 
         } else {
             mFragments[FIRST] = firstFrg;
-            mFragments[SECOND] = findFragment(AllCategoryFragment.class);
+            mFragments[SECOND] = findFragment(MineFragment.class);
             mFragments[THIRD] = findFragment(MineFragment.class);
         }
         showHideFragment(mFragments[index]);

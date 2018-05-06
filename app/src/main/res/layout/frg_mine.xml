@@ -1,30 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/img_avatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:text="登陆"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_avatar" />
+
 
     <TextView
         android:id="@+id/tv_collect"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="#eee"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
         android:text="我的收藏"
         android:textSize="18sp"
-        android:background="#226699"
-        android:gravity="center"
         android:textStyle="bold"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tv_login" />
 
-    <TextView
-        android:id="@+id/tv_change_skin"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="夜间模式"
-        android:textSize="18sp"
-        android:layout_marginTop="5dp"
-        android:background="#118899"
-        android:gravity="center"
-        android:textStyle="bold"
-        />
+
 </LinearLayout>

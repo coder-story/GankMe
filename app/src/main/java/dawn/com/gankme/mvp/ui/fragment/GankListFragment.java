@@ -47,10 +47,7 @@ public class GankListFragment extends BaseSupportFragment<GankListPresenter> imp
     RecyclerView mRecyclerView;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
-    @BindView(R.id.tv_search)
-    TextView tvSearch;
-    @BindView(R.id.ll_search)
-    LinearLayout mSearchLayout;
+
 
 
     @Inject
@@ -108,29 +105,29 @@ public class GankListFragment extends BaseSupportFragment<GankListPresenter> imp
 
 
 
-    private void expand() {
-        //设置伸展状态时的布局
-        tvSearch.setText(R.string.search_expand);
-        FrameLayout.LayoutParams LayoutParams = (FrameLayout.LayoutParams) mSearchLayout.getLayoutParams();
-        LayoutParams.width = LayoutParams.MATCH_PARENT;
-        LayoutParams.setMargins(ArmsUtils.dip2px(getContext(), 10), ArmsUtils.dip2px(getContext(), 10),
-                ArmsUtils.dip2px(getContext(), 10), ArmsUtils.dip2px(getContext(), 10));
-        mSearchLayout.setLayoutParams(LayoutParams);
-        //开始动画
-        beginDelayedTransition(mSearchLayout);
-    }
-
-    private void reduce() {
-        //设置收缩状态时的布局
-        tvSearch.setText(R.string.search);
-        FrameLayout.LayoutParams LayoutParams = (FrameLayout.LayoutParams) mSearchLayout.getLayoutParams();
-        LayoutParams.width = ArmsUtils.dip2px(getContext(), 80);
-        LayoutParams.setMargins(ArmsUtils.dip2px(getContext(), 10), ArmsUtils.dip2px(getContext(), 10),
-                ArmsUtils.dip2px(getContext(), 10), ArmsUtils.dip2px(getContext(), 10));
-        mSearchLayout.setLayoutParams(LayoutParams);
-        //开始动画
-        beginDelayedTransition(mSearchLayout);
-    }
+//    private void expand() {
+//        //设置伸展状态时的布局
+//        tvSearch.setText(R.string.search_expand);
+//        FrameLayout.LayoutParams LayoutParams = (FrameLayout.LayoutParams) mSearchLayout.getLayoutParams();
+//        LayoutParams.width = LayoutParams.MATCH_PARENT;
+//        LayoutParams.setMargins(ArmsUtils.dip2px(getContext(), 10), ArmsUtils.dip2px(getContext(), 10),
+//                ArmsUtils.dip2px(getContext(), 10), ArmsUtils.dip2px(getContext(), 10));
+//        mSearchLayout.setLayoutParams(LayoutParams);
+//        //开始动画
+//        beginDelayedTransition(mSearchLayout);
+//    }
+//
+//    private void reduce() {
+//        //设置收缩状态时的布局
+//        tvSearch.setText(R.string.search);
+//        FrameLayout.LayoutParams LayoutParams = (FrameLayout.LayoutParams) mSearchLayout.getLayoutParams();
+//        LayoutParams.width = ArmsUtils.dip2px(getContext(), 80);
+//        LayoutParams.setMargins(ArmsUtils.dip2px(getContext(), 10), ArmsUtils.dip2px(getContext(), 10),
+//                ArmsUtils.dip2px(getContext(), 10), ArmsUtils.dip2px(getContext(), 10));
+//        mSearchLayout.setLayoutParams(LayoutParams);
+//        //开始动画
+//        beginDelayedTransition(mSearchLayout);
+//    }
 
     void beginDelayedTransition(ViewGroup view) {
         mSet = new AutoTransition();
@@ -181,18 +178,18 @@ public class GankListFragment extends BaseSupportFragment<GankListPresenter> imp
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                scrollY += dy;
-
-                if (scrollY >= 650 && !isExpand) {
-                    expand();
-                    isExpand = true;
-
-                }
-
-                else if (scrollY <= 400 && isExpand) {
-                    reduce();
-                    isExpand = false;
-                }
+//                scrollY += dy;
+//
+//                if (scrollY >= 650 && !isExpand) {
+//                    expand();
+//                    isExpand = true;
+//
+//                }
+//
+//                else if (scrollY <= 400 && isExpand) {
+//                    reduce();
+//                    isExpand = false;
+ //               }
                 super.onScrolled(recyclerView, dx, dy);
 
             }
@@ -275,10 +272,10 @@ public class GankListFragment extends BaseSupportFragment<GankListPresenter> imp
 
 
 
-    @OnClick(R.id.ll_search)
-    public void onViewClicked() {
-        start(SearchFragment.newInstance());
-    }
+//    @OnClick(R.id.ll_search)
+//    public void onViewClicked() {
+//        start(SearchFragment.newInstance());
+//    }
 
 
 }

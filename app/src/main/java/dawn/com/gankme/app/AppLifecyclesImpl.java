@@ -17,7 +17,6 @@ package dawn.com.gankme.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.v7.app.AppCompatDelegate;
 
 import com.jess.arms.base.delegate.AppLifecycles;
 import com.jess.arms.utils.ArmsUtils;
@@ -26,12 +25,6 @@ import com.squareup.leakcanary.RefWatcher;
 
 import butterknife.ButterKnife;
 import dawn.com.gankme.BuildConfig;
-import me.yokeyword.fragmentation.Fragmentation;
-import me.yokeyword.fragmentation.helper.ExceptionHandler;
-import skin.support.SkinCompatManager;
-import skin.support.app.SkinCardViewInflater;
-import skin.support.constraint.app.SkinConstraintViewInflater;
-import skin.support.design.app.SkinMaterialViewInflater;
 import timber.log.Timber;
 
 /**
@@ -87,19 +80,10 @@ public class AppLifecyclesImpl implements AppLifecycles {
         //Message msg = new Message();
         //msg.what = 0;
         //AppManager.post(msg); like EventBus
-        initSkin(application);
+
     }
 
-    private void initSkin(Application application) {
-        SkinCompatManager.withoutActivity(application)                         // Basic Widget support
-                .addInflater(new SkinMaterialViewInflater())            // material design support           [selectable]
-                .addInflater(new SkinConstraintViewInflater())          // ConstraintLayout support          [selectable]
-                .addInflater(new SkinCardViewInflater())                // CardView v7 support               [selectable]
-                .setSkinStatusBarColorEnable(false)                     // Disable statusBarColor skin support，default true   [selectable]
-                .setSkinWindowBackgroundEnable(false)                   // Disable windowBackground skin support，default true [selectable]
-                .loadSkin();
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-    }
+
 
     @Override
     public void onTerminate(Application application) {

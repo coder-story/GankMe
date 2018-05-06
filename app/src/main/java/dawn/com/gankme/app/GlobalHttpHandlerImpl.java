@@ -1,31 +1,24 @@
 /**
-  * Copyright 2017 JessYan
-  *
-  * Licensed under the Apache License, Version 2.0 (the "License");
-  * you may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at
-  *
-  *      http://www.apache.org/licenses/LICENSE-2.0
-  *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  */
+ * Copyright 2017 JessYan
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package dawn.com.gankme.app;
 
 import android.content.Context;
-import android.text.TextUtils;
 
-import com.google.gson.reflect.TypeToken;
 import com.jess.arms.http.GlobalHttpHandler;
-import com.jess.arms.http.RequestInterceptor;
-import com.jess.arms.utils.ArmsUtils;
 
-import java.util.List;
-
-import dawn.com.gankme.mvp.model.entity.User;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -40,8 +33,7 @@ import timber.log.Timber;
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * ================================================
  */
-public class
-GlobalHttpHandlerImpl implements GlobalHttpHandler {
+public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
     private Context context;
 
     public GlobalHttpHandlerImpl(Context context) {
@@ -53,14 +45,9 @@ GlobalHttpHandlerImpl implements GlobalHttpHandler {
                     /* 这里可以先客户端一步拿到每一次http请求的结果,可以解析成json,做一些操作,如检测到token过期后
                        重新请求token,并重新执行请求 */
 
-        if (!TextUtils.isEmpty(httpResult) && RequestInterceptor.isJson(response.body().contentType())) {
-            try {
-                Timber.d("Result ------> " + httpResult );
-            } catch (Exception e) {
-                e.printStackTrace();
-                return response;
-            }
-        }
+        Timber.d("httpResult:" + httpResult);
+
+
 
                  /* 这里如果发现token过期,可以先请求最新的token,然后在拿新的token放入request里去重新请求
                     注意在这个回调之前已经调用过proceed,所以这里必须自己去建立网络请求,如使用okhttp使用新的request去请求

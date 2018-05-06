@@ -1,4 +1,7 @@
+import com.dawn.plugin.AspectjPlugin
+
 apply plugin: 'com.android.application'
+apply plugin: AspectjPlugin
 
 
 android {
@@ -58,8 +61,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["cardview-v7"]) {
         exclude module: 'support-annotations'
     }
-    compile 'me.jessyan:arms:2.3.5'
-
     //tools
     annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
     implementation rootProject.ext.dependencies["progressmanager"]
@@ -75,16 +76,13 @@ dependencies {
     debugImplementation rootProject.ext.dependencies["canary-debug"]
     releaseImplementation rootProject.ext.dependencies["canary-release"]
     testImplementation rootProject.ext.dependencies["canary-release"]
-
+    compile 'org.aspectj:aspectjrt:1.8.9'
     compile 'me.yokeyword:fragmentation:1.2.6'
     // swipeback基于fragmentation, 如果是自定制SupportActivity/Fragment，则参照SwipeBackActivity/Fragment实现即可
     implementation project(':fragmentation_swipeback')
-
-    compile 'skin.support:skin-support:2.2.3'                   // skin-support basic widget
-    compile 'skin.support:skin-support-design:2.2.3'            // skin-support-design material design support [selectable]
-    compile 'skin.support:skin-support-cardview:2.2.3'          // skin-support-cardview CardView support [selectable]
-    compile 'skin.support:skin-support-constraint-layout:2.2.3' // skin-sup
+    compile 'com.android.support.constraint:constraint-layout:1.0.1'
     compile 'com.github.ybq:Android-SpinKit:1.1.0'
+    implementation project(':arms')
 }
 
 

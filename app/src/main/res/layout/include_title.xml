@@ -23,7 +23,7 @@
             android:layout_marginLeft="30px"
             android:layout_marginRight="30px"
             android:layout_centerVertical="true"
-            android:src="@mipmap/ic_arrow_back_white_24dp"/>
+            android:src="@drawable/ic_arrow_back_24dp"/>
 
     </com.zhy.autolayout.AutoRelativeLayout>
 
@@ -44,6 +44,7 @@
         android:textSize="16dp"
         android:layout_marginRight="30px"
         android:textColor="#fff"
+        android:text="134"
         android:layout_gravity="right"
         />
 

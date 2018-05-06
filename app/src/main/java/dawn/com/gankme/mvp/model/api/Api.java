@@ -25,6 +25,6 @@ package dawn.com.gankme.mvp.model.api;
  * ================================================
  */
 public interface Api {
-    String APP_DOMAIN = "https://api.github.com";
-    String RequestSuccess = "0";
+    String APP_DOMAIN = "http://www.wanandroid.com";
+    int  RequestSuccess = 0;
 }

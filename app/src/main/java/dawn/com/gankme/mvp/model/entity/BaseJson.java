@@ -1,12 +1,12 @@
-/**
+/*
  * Copyright 2017 JessYan
- * <p>
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,6 +18,7 @@ package dawn.com.gankme.mvp.model.entity;
 import java.io.Serializable;
 
 import dawn.com.gankme.mvp.model.api.Api;
+
 
 /**
  * ================================================
@@ -31,19 +32,19 @@ import dawn.com.gankme.mvp.model.api.Api;
  */
 public class BaseJson<T> implements Serializable {
     private T data;
-    private String code;
-    private String msg;
+    private int errorCode;
+    private String errorMsg;
 
     public T getData() {
         return data;
     }
 
-    public String getCode() {
-        return code;
+    public int getErrorCode() {
+        return errorCode;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getErrorMsg() {
+        return errorMsg;
     }
 
     /**
@@ -52,7 +53,7 @@ public class BaseJson<T> implements Serializable {
      * @return
      */
     public boolean isSuccess() {
-        if (code.equals(Api.RequestSuccess)) {
+        if (errorCode==Api.RequestSuccess) {
             return true;
         } else {
             return false;

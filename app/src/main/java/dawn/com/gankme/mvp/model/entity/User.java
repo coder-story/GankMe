@@ -16,37 +16,81 @@
 package dawn.com.gankme.mvp.model.entity;
 
 
+import java.util.List;
+
 public class User {
-    private  int id;
-    private  String login;
-    private  String avatar_url;
+    /**
+     * collectIds : []
+     * email :
+     * icon :
+     * id : 5302
+     * password : 123456
+     * type : 0
+     * username : dawn4get
+     */
+
+    private String email;
+    private String icon;
+    private int id;
+    private String password;
+    private int type;
+    private String username;
+    private List<String> collectIds;
 
 
-    public User(int id, String login, String avatar_url) {
-        this.id = id;
-        this.login = login;
-        this.avatar_url = avatar_url;
+    public String getEmail() {
+        return email;
     }
 
-    public User() {
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-
-    public String getAvatarUrl() {
-        if (avatar_url.isEmpty()) return avatar_url;
-        return avatar_url.split("\\?")[0];
+    public String getIcon() {
+        return icon;
     }
 
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public int getId() {
         return id;
     }
 
-    public String getLogin() {
-        return login;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    @Override public String toString() {
-        return "id -> " + id + " login -> " + login;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public List<String> getCollectIds() {
+        return collectIds;
+    }
+
+    public void setCollectIds(List<String> collectIds) {
+        this.collectIds = collectIds;
     }
 }

@@ -35,7 +35,7 @@ public class HomeFragment extends BaseSupportFragment {
     @Override
     public void initData(Bundle savedInstanceState) {
         if (findFragment(GankListFragment.class) == null) {
-            loadRootFragment(R.id.fl_root_home, GankListFragment.newInstance());
+            loadRootFragment(R.id.fl_root_home, ArticleListFragment.newInstance());
         }
     }
 

@@ -48,6 +48,7 @@
             android:drawablePadding="5dp"
             android:gravity="left"
             android:text="搜索"
+            android:visibility="visible"
             android:textColor="@color/search_color" />
     </LinearLayout>
 </FrameLayout>
